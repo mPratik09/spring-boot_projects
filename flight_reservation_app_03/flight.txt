@@ -1,0 +1,49 @@
+create database flight_reservation_db_3;
+use  flight_reservation_db_3;
+
+create table user(id int noT NuLL auto_increment,
+firstName varchar(20), lastName varchar(20),
+email varchar(20), password varchar(256), 
+primary key(id),	unique key(email)
+);
+
+select * from user;
+
+create table flight(id int not null auto_increment,
+flightNumber varchar(20) not null, 
+operatingAirlines varchar(20) not null,
+departureCity varchar(20) not null,
+arrivalCity varchar(20) not null,
+dateOfDeparture date not null,
+estimatedDepartureTime timestamp default current_timestamp,
+primary key (id)
+);
+
+select * from flight;
+
+create table passenger(
+id int not null auto_increment,
+pFirstName varchar (256),
+pLastName varchar(256),
+pMiddleName varchar(256),
+pEmail varchar(50),
+pPhoneNum varchar(10),
+primary key(id)
+)
+
+select * from passenger;
+
+create table reservation(
+id int not null auto_increment,
+checkedIn tinyint(1),
+numOfBags int,
+passengerId int,
+flightId int,
+booked timestamp default current_timestamp,
+primary key (id),
+foreign key (passengerId) references passenger(id) on delete cascade,
+foreign key (flightId) references flight(id)
+)
+
+select * from reservation;
+
